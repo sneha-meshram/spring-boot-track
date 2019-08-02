@@ -35,18 +35,24 @@ public class TrackController {
         return new ResponseEntity<>(sendTrackById, HttpStatus.ACCEPTED);
     }
 
-//    @PostMapping("/allTrack")
-//    public ResponseEntity<?>getAllTrack(@RequestBody Track track){
-//        Track sendAllTrack = trackService.save(track);
-//        return new ResponseEntity<>(sendAllTrack, HttpStatus.ACCEPTED);
-//    }
-//
-//    @DeleteMapping("/track/{id}")
-//    public ResponseEntity deleteTrackById(@PathVariable int id){
-//        Optional<Track> sendDeleteTrack=trackService.deleteTrackById(id);
-//        return new ResponseEntity(sendDeleteTrack, HttpStatus.OK);
-//
-//    }
+    @GetMapping("/allTrack")
+    public ResponseEntity<?>getAllTrack(@RequestBody Track track){
+        Track sendAllTrack = trackService.save(track);
+        return new ResponseEntity<>(sendAllTrack, HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/track/{id}")
+    public ResponseEntity deleteTrackById(@PathVariable int id){
+        Optional<Track> sendDeleteTrack=trackService.deleteTrackById(id);
+        return new ResponseEntity(sendDeleteTrack, HttpStatus.OK);
+
+    }
+    @PatchMapping("/track/{id}")
+    public ResponseEntity updateTrackById(@PathVariable int id){
+        Optional<Track> sendUpdateTrack=trackService.updateTrackById(id);
+        return new ResponseEntity(sendUpdateTrack, HttpStatus.OK);
+
+    }
 
 
 }
