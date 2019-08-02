@@ -47,11 +47,15 @@ public class TrackController {
         return new ResponseEntity(sendDeleteTrack, HttpStatus.OK);
     }
 
+    //method for getting track by id
+
     @PatchMapping("/track/{id}")
     public ResponseEntity updateTrackById(@PathVariable int id){
         Optional<Track> sendUpdateTrack=trackService.updateTrackById(id);
         return new ResponseEntity(sendUpdateTrack, HttpStatus.OK);
     }
+
+    //method for get Track by Name
 
     @GetMapping("/tracks/{name}")
     public ResponseEntity getTrackByName(@PathVariable String name){
