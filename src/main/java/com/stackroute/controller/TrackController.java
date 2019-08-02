@@ -73,6 +73,7 @@ public class TrackController {
         } catch (TrackNotFound e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
+        return responseEntity;
     }
     //method for getting track by id
 
@@ -85,16 +86,17 @@ public class TrackController {
     //method for get Track by Name
 
     @GetMapping("/tracks/{name}")
-    public ResponseEntity getTrackByName(@PathVariable String name) {
+    public ResponseEntity<Track> getTrackByName(@PathVariable String name) {
         ResponseEntity responseEntity;
-
         try {
-            List<Track> sendTrackByName = trackService.gettrackByName(name);
+            List<Track> sendTrackByName = trackService.getTrackByName(name);
             return new ResponseEntity(sendTrackByName, HttpStatus.OK);
         } catch (TrackNotFound e) {
-
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-
         }
+        return responseEntity;
     }
+
+
 }
+

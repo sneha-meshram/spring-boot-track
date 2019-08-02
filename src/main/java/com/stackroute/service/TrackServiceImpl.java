@@ -28,7 +28,7 @@ public class TrackServiceImpl implements TrackService {
         return savedTrack;
     }
     @Override
-    public List<Track> gettrackByName(String name)throws TrackNotFound {
+    public List<Track> getTrackByName(String name)throws TrackNotFound {
        if(trackRepository.findByName(name).isEmpty()) {
            throw new TrackNotFound("track not found");
        }else
