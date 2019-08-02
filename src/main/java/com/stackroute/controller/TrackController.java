@@ -65,7 +65,7 @@ public class TrackController {
     }
 
     @DeleteMapping("/track/{id}")
-    public ResponseEntity deleteTrackById(@PathVariable int id) throws TrackNotFound {
+    public ResponseEntity deleteTrackById(@PathVariable int id) {
         ResponseEntity responseEntity;
         try {
             Optional<Track> sendDeleteTrack = trackService.deleteTrackById(id);
@@ -74,19 +74,27 @@ public class TrackController {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
-        //method for getting track by id
+    //method for getting track by id
 
-        @PatchMapping("/track/{id}")
-        public ResponseEntity updateTrackById ( @PathVariable int id){
-            Optional<Track> sendUpdateTrack = trackService.updateTrackById(id);
-            return new ResponseEntity(sendUpdateTrack, HttpStatus.OK);
-        }
+    @PatchMapping("/track/{id}")
+    public ResponseEntity updateTrackById(@PathVariable int id) {
+        Optional<Track> sendUpdateTrack = trackService.updateTrackById(id);
+        return new ResponseEntity(sendUpdateTrack, HttpStatus.OK);
+    }
 
-        //method for get Track by Name
+    //method for get Track by Name
 
-        @GetMapping("/tracks/{name}")
-        public ResponseEntity getTrackByName (@PathVariable String name){
+    @GetMapping("/tracks/{name}")
+    public ResponseEntity getTrackByName(@PathVariable String name) {
+        ResponseEntity responseEntity;
+
+        try {
             List<Track> sendTrackByName = trackService.gettrackByName(name);
             return new ResponseEntity(sendTrackByName, HttpStatus.OK);
+        } catch (TrackNotFound e) {
+
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+
         }
     }
+}

@@ -27,6 +27,13 @@ public class TrackServiceImpl implements TrackService {
         Track savedTrack = trackRepository.save(track);
         return savedTrack;
     }
+    @Override
+    public List<Track> gettrackByName(String name)throws TrackNotFound {
+       if(trackRepository.findByName(name).isEmpty()) {
+           throw new TrackNotFound("track not found");
+       }else
+           return trackRepository.findByName(name);
+    }
 
     @Override
     public Track getTrackById(int id)throws TrackNotFound {
@@ -69,10 +76,6 @@ public class TrackServiceImpl implements TrackService {
         return optionalUpdate;
     }
 
-    @Override
-    public List<Track> gettrackByName(String name) {
-        List<Track> trackByName=  trackRepository.findByName(name);
-        return (List<Track>) trackByName;
-    }
+
 
 }
