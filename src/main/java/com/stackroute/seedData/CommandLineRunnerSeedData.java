@@ -22,5 +22,7 @@ public class CommandLineRunnerSeedData implements CommandLineRunner {
         trackRepository.save(track1);
         Track track2=new Track(2,"shreya","good");
         trackRepository.save(track2);
+        Track track3=new Track(3,"sunidhi","ok");
+        trackRepository.save(track3);
     }
 }
