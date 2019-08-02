@@ -35,7 +35,7 @@ public class TrackController {
         return new ResponseEntity<>(sendTrackById, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/allTrack")
+    @GetMapping("/tracks")
     public ResponseEntity<?>getAllTrack(@RequestBody Track track){
         Track sendAllTrack = trackService.save(track);
         return new ResponseEntity<>(sendAllTrack, HttpStatus.ACCEPTED);
@@ -53,5 +53,9 @@ public class TrackController {
         return new ResponseEntity(sendUpdateTrack, HttpStatus.OK);
     }
 
-
+    @GetMapping("/tracks/{name}")
+    public ResponseEntity getTrackByName(@PathVariable String name){
+        List<Track> sendTrackByName=trackService.gettrackByName(name);
+        return new ResponseEntity(sendTrackByName,HttpStatus.OK);
+    }
 }

@@ -51,4 +51,11 @@ public class TrackServiceImp implements TrackService {
         }
         return optionalUpdate;
     }
+
+    @Override
+    public List<Track> gettrackByName(String name) {
+        List<Track> trackByName=  trackRepository.findByName(name);
+        return (List<Track>) trackByName;
+    }
+
 }
