@@ -28,16 +28,12 @@ public class TrackController {
         return new ResponseEntity<>(sendTrack, HttpStatus.ACCEPTED);
     }
 
-//    public Track save(Track track) {
-//        return trackService.save(track);
-//    }
 
-
-//    @GetMapping("/track/{id}")
-//    public ResponseEntity<?>getTrackById(@PathVariable int id){
-//        Track sendTrackById=trackService.getTrackById(id);
-//        return new ResponseEntity<>(sendTrackById, HttpStatus.ACCEPTED);
-//    }
+    @GetMapping("/track/{id}")
+    public ResponseEntity<?>getTrackById(@PathVariable int id){
+        Track sendTrackById=trackService.getTrackById(id);
+        return new ResponseEntity<>(sendTrackById, HttpStatus.ACCEPTED);
+    }
 
 //    @PostMapping("/allTrack")
 //    public ResponseEntity<?>getAllTrack(@RequestBody Track track){

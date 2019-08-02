@@ -30,7 +30,7 @@ public class TrackServiceImp implements TrackService {
     }
 
     @Override
-    public List<Track> getAllTrack(Track track) {
+    public List<Track> getAllTrack() {
         return trackRepository.findAll();
     }
 
