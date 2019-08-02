@@ -45,8 +45,8 @@ public class TrackController {
     public ResponseEntity deleteTrackById(@PathVariable int id){
         Optional<Track> sendDeleteTrack=trackService.deleteTrackById(id);
         return new ResponseEntity(sendDeleteTrack, HttpStatus.OK);
-
     }
+
     @PatchMapping("/track/{id}")
     public ResponseEntity updateTrackById(@PathVariable int id){
         Optional<Track> sendUpdateTrack=trackService.updateTrackById(id);
