@@ -4,7 +4,7 @@ import com.stackroute.domain.Track;
 import com.stackroute.exceptions.TrackAlreadyExistsException;
 import com.stackroute.exceptions.TrackNotFound;
 import com.stackroute.repository.TrackRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -13,32 +13,26 @@ import java.util.Optional;
 
 
 @Service
-public class TrackServiceImpl implements TrackService {
+@Qualifier("dummy")
+public class TrackDummyServiceImpl implements TrackService {
+
     private TrackRepository trackRepository;
-@Autowired
-    public TrackServiceImpl(TrackRepository trackRepository) {
+
+    public TrackDummyServiceImpl(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
 
     @Override
     public Track save(Track track) throws TrackAlreadyExistsException {
-
         if(trackRepository.existsById(track.getId())){
             throw new TrackAlreadyExistsException("track already exist");
         }
         Track savedTrack = trackRepository.save(track);
         return savedTrack;
     }
-    @Override
-    public List<Track> getTrackByName(String name)throws TrackNotFound {
-       if(trackRepository.findByName(name).isEmpty()) {
-           throw new TrackNotFound("track not found");
-       }else
-           return trackRepository.findByName(name);
-    }
 
     @Override
-    public Track getTrackById(int id)throws TrackNotFound {
+    public Track getTrackById(int id) throws TrackNotFound {
 
         if (trackRepository.existsById(id)) {
             Track track = trackRepository.findById(id).get();
@@ -49,19 +43,16 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public List<Track> getAllTrack() {
+    public List<Track> getAllTrack() throws TrackNotFound {
         return trackRepository.findAll();
     }
 
-
-
     @Override
-    public Optional<Track> deleteTrackById(int id)throws TrackNotFound {
-
+    public Optional<Track> deleteTrackById(int id) throws TrackNotFound {
         Optional<Track> optionalTrack = trackRepository.findById(id);
         if (optionalTrack.isPresent()) {
             trackRepository.deleteById(id);
-           return optionalTrack;
+            return optionalTrack;
         } else
             throw new TrackNotFound("track not found");
     }
@@ -75,4 +66,11 @@ public class TrackServiceImpl implements TrackService {
         return optionalUpdate;
     }
 
+    @Override
+    public List<Track> getTrackByName(String name) throws TrackNotFound {
+        if(trackRepository.findByName(name).isEmpty()) {
+            throw new TrackNotFound("track not found");
+        }else
+            return trackRepository.findByName(name);
+        }
 }

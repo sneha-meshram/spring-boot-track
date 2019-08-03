@@ -3,26 +3,33 @@ package com.stackroute.seedData;
 import com.stackroute.domain.Track;
 import com.stackroute.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CommandLineRunnerSeedData implements CommandLineRunner {
 
-   private TrackRepository trackRepository;
+    private TrackRepository trackRepository;
 
-   @Autowired
+    @Value("${track2.id}")
+    private int id;
+    @Value("${track2.name}")
+    private String name;
+    @Value("${track2.comment}")
+    private String comment;
+    Track track2 = new Track();
+
+    @Autowired
     public CommandLineRunnerSeedData(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        Track track1=new Track(1,"atif","nice");
-        trackRepository.save(track1);
-        Track track2=new Track(2,"shreya","good");
+        track2.setId(id);
+        track2.setName(name);
+        track2.setComment(comment);
         trackRepository.save(track2);
-        Track track3=new Track(3,"sunidhi","ok");
-        trackRepository.save(track3);
     }
 }
