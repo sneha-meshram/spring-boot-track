@@ -96,7 +96,7 @@ public class TrackControllerTest {
         verify(trackRepository, times(1)).getAllTrack(track);
     }
 
-    //testcase for UpdateById method.
+    //testcase for UpdateById success
     @Test
     public void givenTrackShouldReturnUpdatedTrack() throws Exception {
         when(trackService.updateTrackById(anyInt())).thenReturn(track);
@@ -107,7 +107,7 @@ public class TrackControllerTest {
         verify(trackRepository, times(1)).getAllTrack(track);
     }
 
-    //testcase for UpdateTrackById
+    //testcase for UpdateTrackById failure
     @Test
     public void givenTrackShouldReturnTrackNotFoundException() throws Exception {
         when(trackService.updateTrackById(anyInt())).thenThrow(TrackNotFound.class);
@@ -117,7 +117,7 @@ public class TrackControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    //testcase for deleteTrackById method
+    //testcase for deleteTrackById success
     @Test
     public void givenTrackIdShouldDeleteTrackAndReturnDeletedTrack() throws Exception {
         when(trackService.deleteTrackById(anyInt())).thenReturn(Optional.of(track));
@@ -136,5 +136,3 @@ public class TrackControllerTest {
         }
     }
 }
-
-
