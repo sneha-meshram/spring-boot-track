@@ -5,6 +5,7 @@ import com.stackroute.domain.Track;
 import com.stackroute.exceptions.TrackAlreadyExistsException;
 import com.stackroute.exceptions.TrackNotFound;
 import com.stackroute.service.TrackService;
+import com.stackroute.service.TrackServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -18,10 +19,13 @@ import java.util.Optional;
 @RequestMapping("/api/v1/")
 public class TrackController {
 
-    TrackService trackService;
+    private TrackService trackService;
+
+    public TrackController() {
+    }
 
     @Autowired
-    public TrackController(@Qualifier("dummy") TrackService trackService)
+    public TrackController(TrackService trackService)
     {
         this.trackService = trackService;
     }
