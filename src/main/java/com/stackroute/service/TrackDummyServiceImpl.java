@@ -58,14 +58,12 @@ public class TrackDummyServiceImpl implements TrackService {
     }
 
     @Override
-    public Track updateTrackById(int id) throws Exception {
-        if (trackRepository.existsById(id)) {
-
-            Track getTrack = trackRepository.findById(id).get();
-            return getTrack;
-        } else {
-            throw new Exception("Track not found for updation");
-        }
+    public Track updateTrackById(int id, Track track) {
+        //        delete the track
+        trackRepository.deleteById(id);
+        // edit the track and save it
+        Track updateTrack = trackRepository.save(track);
+        return updateTrack;
     }
 
 

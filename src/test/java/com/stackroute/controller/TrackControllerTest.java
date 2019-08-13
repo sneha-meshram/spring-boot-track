@@ -104,28 +104,24 @@ public class TrackControllerTest {
     //testcase for UpdateById success
     @Test
     public void givenTrackShouldReturnUpdatedTrack() throws Exception {
-        when(trackService.updateTrackById(anyInt())).thenReturn(track);
+        when(trackService.updateTrackById(anyInt(),track)).thenReturn(track);
         mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/track/11")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
-        verify(trackService, times(1)).updateTrackById(track.getId());
+        verify(trackService, times(1)).save(track);
     }
 
    // testcase for UpdateTrackById failure
     @Test
     public void givenTrackShouldReturnTrackNotFoundException() throws Exception {
-        when(trackService.updateTrackById(anyInt())).thenThrow(TrackNotFound.class);
+        when(trackService.updateTrackById(anyInt(),track)).thenThrow(TrackNotFound.class);
         mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/track/11")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andDo(MockMvcResultHandlers.print());
-        verify(trackService, times(1)).updateTrackById(track.getId());
+        verify(trackService, times(1)).save(track);
     }
-
-
-
-
     //testcase for DeleteTrackById success
     @Test
     public void givenTrackIdShouldReturnDeletedTrack() throws Exception {
@@ -160,8 +156,6 @@ public class TrackControllerTest {
                 .andDo(MockMvcResultHandlers.print());
         verify(trackService, times(1)).getTrackByName(track.getName());
     }
-
-
 
 
     private static String asJsonString(final Object obj) {

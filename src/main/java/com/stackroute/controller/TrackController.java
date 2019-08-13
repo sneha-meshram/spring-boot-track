@@ -66,12 +66,23 @@ public class TrackController {
     }
     //method for update track by id
 
-    @PatchMapping("/track/{id}")
-    public ResponseEntity updateTrackById(@PathVariable int id) throws Exception {
-        Track sendUpdateTrack = trackService.updateTrackById(id);
-        return new ResponseEntity(sendUpdateTrack, HttpStatus.ACCEPTED);
-    }
+//    @PatchMapping("/track/{id}")
+//    public ResponseEntity updateTrackById(@PathVariable int id) throws Exception {
+//        Track sendUpdateTrack = trackService.updateTrackById(id);
+//        return new ResponseEntity(sendUpdateTrack, HttpStatus.ACCEPTED);
+//    }
 
+    @PatchMapping("track/{id}")
+    public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track){
+        ResponseEntity responseEntity;
+        try {
+            trackService.updateTrackById(id,track);
+            responseEntity = new ResponseEntity(track, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            responseEntity = new ResponseEntity(ex.getMessage(), HttpStatus.CONFLICT);
+        }
+        return responseEntity;
+    }
     //method for get Track by Name
 
     @GetMapping("/track/name/{name}")
