@@ -33,12 +33,13 @@ public class TrackServiceImpl implements TrackService {
         return savedTrack;
     }
 
+
     @Override
-    public List<Track> getTrackByName(String name) throws TrackNotFound {
-        if (trackRepository.findByName(name).isEmpty()) {
+    public Track getTrackByName(String name) throws TrackNotFound {
+        if(trackRepository.findByName(name).isEmpty()) {
             throw new TrackNotFound("track not found");
-        } else
-            return trackRepository.findByName(name);
+        }else
+            return (Track) trackRepository.findByName(name);
     }
 
     @Override
@@ -51,31 +52,29 @@ public class TrackServiceImpl implements TrackService {
             throw new TrackNotFound("track not found");
         }
     }
+    @Override
+    public Track updateTrackById(int id) throws Exception {
+        if (trackRepository.existsById(id)) {
 
+            Track getTrack = trackRepository.findById(id).get();
+            return getTrack;
+        } else {
+            throw new Exception("Track not found for updation");
+        }
+    }
     @Override
     public List<Track> getAllTrack() {
         return trackRepository.findAll();
     }
 
-
     @Override
-    public Optional<Track> deleteTrackById(int id) throws TrackNotFound {
-
-        Optional<Track> optionalTrack = trackRepository.findById(id);
-        if (optionalTrack.isPresent()) {
-            trackRepository.deleteById(id);
-            return optionalTrack;
-        } else
-            throw new TrackNotFound("track not found");
-    }
-
-    @Override
-    public Optional<Track> updateTrackById(int id) {
-        Optional<Track> optionalUpdate = updateTrackById(id);
-        if (optionalUpdate.isPresent()) {
-            Track track1 = updateTrackById(id).get();
+    public Track deleteTrackById(int id) throws Exception {
+        if (trackRepository.existsById((id))) {
+            Track getTrack = trackRepository.findById(id).get();
+            return getTrack;
+        } else {
+            throw new Exception("Track not found for deletion");
         }
-        return optionalUpdate;
     }
 
 }
