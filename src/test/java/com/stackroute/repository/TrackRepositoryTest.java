@@ -30,8 +30,7 @@ public class TrackRepositoryTest {
         track.setId(11);
         track.setName("lalala");
         track.setComment("nice song");
-//        list = new ArrayList();
-//        list.add(track);
+
     }
 
     @After
@@ -50,49 +49,49 @@ public class TrackRepositoryTest {
 
     //test case for save track failure.
     @Test
-    public void testSaveTrackFailure(){
-       Track testTrack=new Track(3,"samjhawan","By Rahat");
-       trackRepository.save(track);
-       Track fetchTrack=trackRepository.findById(track.getId()).get();
-       Assert.assertNotEquals(testTrack,track);
+    public void testSaveTrackFailure() {
+        Track testTrack = new Track(3, "samjhawan", "By Rahat");
+        trackRepository.save(track);
+        Track fetchTrack = trackRepository.findById(track.getId()).get();
+        Assert.assertNotEquals(testTrack, track);
     }
 
 
     //test case for given track should return All track.
     @Test
-    public void testGetAllTrack(){
-        Track t=new Track(4,"photograph","Ed sheeran");
-        Track t1=new Track(5,"theMiddle","Zedd");
+    public void testGetAllTrack() {
+        Track t = new Track(4, "photograph", "Ed sheeran");
+        Track t1 = new Track(5, "theMiddle", "Zedd");
         trackRepository.save(t);
         trackRepository.save(t1);
-        List<Track> list=trackRepository.findAll();
-        Assert.assertEquals("photograph",list.get(0).getName());
+        List<Track> list = trackRepository.findAll();
+        Assert.assertEquals("photograph", list.get(0).getName());
     }
 
     //test case for returning track by name.
     @Test
-    public void testGetTrackByName(){
-        Track t=new Track(4,"perfect","Ed sheeran");
-        Track t1=new Track(5,"perfect","Zedd");
-        Track t3=new Track(5,"dive","zayn");
+    public void testGetTrackByName() {
+        Track t = new Track(4, "perfect", "Ed sheeran");
+        Track t1 = new Track(5, "perfect", "Zedd");
+        Track t3 = new Track(5, "dive", "zayn");
         trackRepository.save(t);
         trackRepository.save(t1);
         trackRepository.save(t3);
-        List<Track> list=trackRepository.findAll();
-        Assert.assertEquals("perfect",list.get(0).getName());
+        List<Track> list = trackRepository.findAll();
+        Assert.assertEquals("perfect", list.get(0).getName());
     }
 
     //test case for should not returning track by name.
     @Test
-    public void testForShouldNotReturnTrackByName(){
-        Track t=new Track(4,"perfect","Ed sheeran");
-        Track t1=new Track(5,"perfect","Zedd");
-        Track t3=new Track(5,"dive","zayn");
+    public void testForShouldNotReturnTrackByName() {
+        Track t = new Track(4, "perfect", "Ed sheeran");
+        Track t1 = new Track(5, "perfect", "Zedd");
+        Track t3 = new Track(5, "dive", "zayn");
         trackRepository.save(t);
         trackRepository.save(t1);
         trackRepository.save(t3);
-        List<Track> list=trackRepository.findAll();
-        Assert.assertNotEquals("perfect",list);
+        List<Track> list = trackRepository.findAll();
+        Assert.assertNotEquals("perfect", list);
     }
 
 
