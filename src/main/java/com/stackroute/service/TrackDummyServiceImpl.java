@@ -24,7 +24,7 @@ public class TrackDummyServiceImpl implements TrackService {
 
     @Override
     public Track save(Track track) throws TrackAlreadyExistsException {
-        if(trackRepository.existsById(track.getId())){
+        if (trackRepository.existsById(track.getId())) {
             throw new TrackAlreadyExistsException("track already exist");
         }
         Track savedTrack = trackRepository.save(track);
@@ -69,9 +69,9 @@ public class TrackDummyServiceImpl implements TrackService {
 
     @Override
     public Track getTrackByName(String name) throws TrackNotFound {
-        if(trackRepository.findByName(name).isEmpty()) {
+        if (trackRepository.findByName(name).isEmpty()) {
             throw new TrackNotFound("track not found");
-        }else
+        } else
             return (Track) trackRepository.findByName(name);
-        }
+    }
 }

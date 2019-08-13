@@ -25,8 +25,7 @@ public class TrackController {
     }
 
     @Autowired
-    public TrackController(TrackService trackService)
-    {
+    public TrackController(TrackService trackService) {
         this.trackService = trackService;
     }
 
@@ -73,10 +72,10 @@ public class TrackController {
 //    }
 
     @PatchMapping("track/{id}")
-    public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track){
+    public ResponseEntity<?> updateTrack(@PathVariable int id, @RequestBody Track track) {
         ResponseEntity responseEntity;
         try {
-            trackService.updateTrackById(id,track);
+            trackService.updateTrackById(id, track);
             responseEntity = new ResponseEntity(track, HttpStatus.CREATED);
         } catch (Exception ex) {
             responseEntity = new ResponseEntity(ex.getMessage(), HttpStatus.CONFLICT);
@@ -86,12 +85,12 @@ public class TrackController {
     //method for get Track by Name
 
     @GetMapping("/track/name/{name}")
-    public ResponseEntity<Track> getTrackByName(@PathVariable String name)throws Exception{
+    public ResponseEntity<Track> getTrackByName(@PathVariable String name) throws Exception {
         ResponseEntity responseEntity;
-            Track sendTrackByName = trackService.getTrackByName(name);
-            return new ResponseEntity(sendTrackByName, HttpStatus.FOUND);
+        Track sendTrackByName = trackService.getTrackByName(name);
+        return new ResponseEntity(sendTrackByName, HttpStatus.FOUND);
 
-          //  responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        //  responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         //return responseEntity;
     }
 }

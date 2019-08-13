@@ -36,9 +36,9 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public Track getTrackByName(String name) throws TrackNotFound {
-        if(trackRepository.findByName(name).isEmpty()) {
+        if (trackRepository.findByName(name).isEmpty()) {
             throw new TrackNotFound("track not found");
-        }else
+        } else
             return (Track) trackRepository.findByName(name);
     }
 
@@ -71,6 +71,7 @@ public class TrackServiceImpl implements TrackService {
         Track updateTrack = trackRepository.save(track);
         return updateTrack;
     }
+
     @Override
     public List<Track> getAllTrack() {
         return trackRepository.findAll();
