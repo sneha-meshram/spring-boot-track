@@ -11,11 +11,13 @@ import java.util.Optional;
 @Service
 public class TrackServiceImp implements TrackService {
     private TrackRepository trackRepository;
-@Autowired
+
+    @Autowired
     public TrackServiceImp(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
 
+    //return the all save track.
     @Override
     public Track save(Track track) {
         Track savedTrack = trackRepository.save(track);
@@ -29,11 +31,13 @@ public class TrackServiceImp implements TrackService {
         return getTrackById;
     }
 
+    //return all track.
     @Override
     public List<Track> getAllTrack() {
         return trackRepository.findAll();
     }
 
+    //delete track by id.
     @Override
     public Optional<Track> deleteTrackById(int id) {
         Optional<Track> optionalTrack = deleteTrackById(id);
@@ -43,11 +47,12 @@ public class TrackServiceImp implements TrackService {
         return optionalTrack;
     }
 
+    //Update track by id.
     @Override
     public Optional<Track> updateTrackById(int id) {
-        Optional<Track> optionalUpdate=updateTrackById(id);
-        if(optionalUpdate.isPresent()){
-            Track track1=updateTrackById(id).get();
+        Optional<Track> optionalUpdate = updateTrackById(id);
+        if (optionalUpdate.isPresent()) {
+            Track track1 = updateTrackById(id).get();
         }
         return optionalUpdate;
     }
