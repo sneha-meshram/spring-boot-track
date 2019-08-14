@@ -96,17 +96,17 @@ public class TrackRepositoryTest {
 
     //testcase for returing track by id.
     @Test
-    public void testGetByIdTrack(){
+    public void testGetByIdTrack() {
         trackRepository.save(track);
-        Track testId=trackRepository.findById(track.getId()).get();
-        Assert.assertEquals(11,testId.getId());
+        Track testId = trackRepository.findById(track.getId()).get();
+        Assert.assertEquals(11, testId.getId());
     }
 
     //testcase for should not returing track by id.
     @Test
-    public void testGetByIdTrackFailure(){
+    public void testGetByIdTrackFailure() {
         trackRepository.save(track);
-        Track testId=trackRepository.findById(track.getId()).get();
-        Assert.assertNotEquals(1,testId.getId());
+        Track testId = trackRepository.findById(track.getId()).get();
+        Assert.assertNotEquals(1, testId.getId());
     }
 }

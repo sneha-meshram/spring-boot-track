@@ -19,8 +19,10 @@ package com.stackroute.service;
 //import static org.junit.Assert.*;
 //import static org.mockito.Mockito.verify;
 //import static org.mockito.Mockito.when;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
+
 import com.stackroute.domain.Track;
 import com.stackroute.exceptions.TrackAlreadyExistsException;
 import com.stackroute.exceptions.TrackNotFound;
@@ -44,6 +46,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
+
 public class TrackServiceTest {
 
     private Track track;
@@ -88,7 +91,7 @@ public class TrackServiceTest {
     public void givenTrackShouldsaveTrackTestFailure() throws TrackAlreadyExistsException {
         when(trackRepository.existsById(track.getId())).thenReturn(true);
         Track savedTrack = trackService.save(track);
-        Assert.assertEquals(track,savedTrack);
+        Assert.assertEquals(track, savedTrack);
 
     }
 
@@ -128,8 +131,8 @@ public class TrackServiceTest {
         trackRepository.save(track);
         when(trackRepository.findByName("BlankSpace")).thenReturn(list);
         //Track getTrack =new Track(12,"BlankSpace","TaylorSwift");
-        List<Track>returnList=trackRepository.findByName("BlankSpace");
-        Assert.assertEquals(list,returnList);
+        List<Track> returnList = trackRepository.findByName("BlankSpace");
+        Assert.assertEquals(list, returnList);
         verify(trackRepository, times(1)).findByName("BlankSpace");
     }
 
