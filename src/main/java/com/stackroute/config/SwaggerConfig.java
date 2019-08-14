@@ -13,7 +13,7 @@ public class SwaggerConfig {
     //Generate API documentation using Swagger 2
 
     @Bean
-    public Docket productApi(){
+    public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2);
     }
 }
