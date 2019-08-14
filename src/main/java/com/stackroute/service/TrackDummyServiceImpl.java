@@ -22,15 +22,17 @@ public class TrackDummyServiceImpl implements TrackService {
         this.trackRepository = trackRepository;
     }
 
+    //return all save track.
     @Override
     public Track save(Track track) throws TrackAlreadyExistsException {
-        if(trackRepository.existsById(track.getId())){
+        if (trackRepository.existsById(track.getId())) {
             throw new TrackAlreadyExistsException("track already exist");
         }
         Track savedTrack = trackRepository.save(track);
         return savedTrack;
     }
 
+    //return track by id.
     @Override
     public Track getTrackById(int id) throws TrackNotFound {
 
@@ -42,11 +44,13 @@ public class TrackDummyServiceImpl implements TrackService {
         }
     }
 
+    //return all tracks.
     @Override
     public List<Track> getAllTrack() throws TrackNotFound {
         return trackRepository.findAll();
     }
 
+    //delete the track which is given by id.
     @Override
     public Optional<Track> deleteTrackById(int id) throws TrackNotFound {
         Optional<Track> optionalTrack = trackRepository.findById(id);
@@ -57,20 +61,22 @@ public class TrackDummyServiceImpl implements TrackService {
             throw new TrackNotFound("track not found");
     }
 
+    //update the track which is given by id.
     @Override
     public Optional<Track> updateTrackById(int id) {
-        Optional<Track> optionalUpdate=updateTrackById(id);
-        if(optionalUpdate.isPresent()){
-            Track track1=updateTrackById(id).get();
+        Optional<Track> optionalUpdate = updateTrackById(id);
+        if (optionalUpdate.isPresent()) {
+            Track track1 = updateTrackById(id).get();
         }
         return optionalUpdate;
     }
 
+    //given track name should return the track details.
     @Override
     public List<Track> getTrackByName(String name) throws TrackNotFound {
-        if(trackRepository.findByName(name).isEmpty()) {
+        if (trackRepository.findByName(name).isEmpty()) {
             throw new TrackNotFound("track not found");
-        }else
+        } else
             return trackRepository.findByName(name);
-        }
+    }
 }

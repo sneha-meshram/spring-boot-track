@@ -26,6 +26,7 @@ public class TrackController {
         this.trackService = trackService;
     }
 
+    //return all save track.
     @PostMapping("track")
     public ResponseEntity<?> save(@RequestBody Track track) throws Exception {
         ResponseEntity responseEntity;
@@ -35,7 +36,7 @@ public class TrackController {
         return responseEntity;
     }
 
-
+    //return track by id.
     @GetMapping("/track/{id}")
     public ResponseEntity<?> getTrackById(@PathVariable int id) throws Exception {
         ResponseEntity responseEntity;
@@ -45,6 +46,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //return all tracks.
     @GetMapping("/tracks")
     public ResponseEntity<?> getAllTrack(@RequestBody Track track) throws Exception {
         ResponseEntity responseEntity;
@@ -54,6 +56,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //delete the track which is given by id.
     @DeleteMapping("/track/{id}")
     public ResponseEntity deleteTrackById(@PathVariable int id)throws Exception {
         ResponseEntity responseEntity;
@@ -62,8 +65,8 @@ public class TrackController {
            // responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
             //return responseEntity;
     }
-    //method for getting track by id
 
+    //method for getting track by id
     @PatchMapping("/track/{id}")
     public ResponseEntity updateTrackById(@PathVariable int id) {
         Optional<Track> sendUpdateTrack = trackService.updateTrackById(id);
@@ -71,7 +74,6 @@ public class TrackController {
     }
 
     //method for get Track by Name
-
     @GetMapping("/tracks/{name}")
     public ResponseEntity<Track> getTrackByName(@PathVariable String name)throws Exception{
         ResponseEntity responseEntity;
