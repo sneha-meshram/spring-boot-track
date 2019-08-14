@@ -1,6 +1,6 @@
 package com.stackroute.exceptions;
 
-public class TrackNotFound extends  Exception{
+public class TrackNotFound extends Exception {
 
 
     private String message;

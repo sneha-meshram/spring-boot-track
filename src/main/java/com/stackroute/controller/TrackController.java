@@ -25,11 +25,11 @@ public class TrackController {
     }
 
     @Autowired
-    public TrackController(TrackService trackService)
-    {
+    public TrackController(TrackService trackService) {
         this.trackService = trackService;
     }
 
+    //return all save track.
     @PostMapping("track")
     public ResponseEntity<?> save(@RequestBody Track track) throws Exception {
         ResponseEntity responseEntity;
@@ -39,7 +39,7 @@ public class TrackController {
         return responseEntity;
     }
 
-
+    //return track by id.
     @GetMapping("/track/{id}")
     public ResponseEntity<?> getTrackById(@PathVariable int id) throws Exception {
         ResponseEntity responseEntity;
@@ -49,6 +49,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //return all track.
     @GetMapping("/tracks")
     public ResponseEntity<?> getAllTrack(@RequestBody Track track) throws Exception {
         ResponseEntity responseEntity;
@@ -59,15 +60,15 @@ public class TrackController {
     }
 
     @DeleteMapping("/track/{id}")
-    public ResponseEntity deleteTrackById(@PathVariable int id)throws Exception {
+    public ResponseEntity deleteTrackById(@PathVariable int id) throws Exception {
         ResponseEntity responseEntity;
-            Optional<Track> sendDeleteTrack = trackService.deleteTrackById(id);
-            return new ResponseEntity(sendDeleteTrack, HttpStatus.OK);
-           // responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-            //return responseEntity;
+        Optional<Track> sendDeleteTrack = trackService.deleteTrackById(id);
+        return new ResponseEntity(sendDeleteTrack, HttpStatus.OK);
+        // responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        //return responseEntity;
     }
-    //method for getting track by id
 
+    //method for getting track by id
     @PatchMapping("/track/{id}")
     public ResponseEntity updateTrackById(@PathVariable int id) {
         Optional<Track> sendUpdateTrack = trackService.updateTrackById(id);
@@ -75,14 +76,13 @@ public class TrackController {
     }
 
     //method for get Track by Name
-
     @GetMapping("/tracks/{name}")
-    public ResponseEntity<Track> getTrackByName(@PathVariable String name)throws Exception{
+    public ResponseEntity<Track> getTrackByName(@PathVariable String name) throws Exception {
         ResponseEntity responseEntity;
-            List<Track> sendTrackByName = trackService.getTrackByName(name);
-            return new ResponseEntity(sendTrackByName, HttpStatus.OK);
+        List<Track> sendTrackByName = trackService.getTrackByName(name);
+        return new ResponseEntity(sendTrackByName, HttpStatus.OK);
 
-          //  responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        //  responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         //return responseEntity;
     }
 }
