@@ -79,9 +79,9 @@ public class TrackServiceTest {
         when(trackRepository.save((Track) any())).thenReturn(track);
         Track saveTrack = trackRepository.save(track);
         Assert.assertEquals(track, saveTrack);
-       verify(trackRepository, times(1)).save(track);
-
+        verify(trackRepository, times(1)).save(track);
     }
+
 
     //given track should not return the save track.
     @Test(expected = TrackAlreadyExistsException.class)
@@ -100,25 +100,42 @@ public class TrackServiceTest {
         List<Track> tracks = trackRepository.findAll();
         Assert.assertEquals(list, tracks);
     }
-    @Test
-    public void deleteTrackById() {
-    }
 
+    //given track by id should delete the track.
     @Test
     public void givenIdShouldReturnDeletedTrack() throws Exception {
         when(trackRepository.existsById(track.getId())).thenReturn(true);
         when(trackRepository.findById(track.getId())).thenReturn(Optional.of(track));
         Track savedTrack = trackService.deleteTrackById(track.getId());
         assertEquals(track, savedTrack);
-       // verify(trackRepository, times(1)).save(track);
+        verify(trackRepository, times(0)).deleteById(12);
     }
 
-
+    //given track should return the updated track.
     @Test
-    public void updateTrackById() {
+    public void givenTrackDetailsShouldReturnUpdatedTrack() throws Exception {
+        trackRepository.save(track);
+        when(trackRepository.findById(track.getId())).thenReturn(Optional.of(track));
+        track.setComment("best");
+        Track newTrack = new Track(12, "BlankSpace", "best");
+        Assert.assertEquals(newTrack, track);
+        verify(trackRepository, times(0)).findById(track.getId());
     }
 
+    //given track Name should return the track details.
     @Test
-    public void getTrackByName() {
+    public void givenTrackNameShouldReturnTrack() throws Exception {
+        trackRepository.save(track);
+        when(trackRepository.findByName("BlankSpace")).thenReturn(list);
+        //Track getTrack =new Track(12,"BlankSpace","TaylorSwift");
+        List<Track>returnList=trackRepository.findByName("BlankSpace");
+        Assert.assertEquals(list,returnList);
+        verify(trackRepository, times(1)).findByName("BlankSpace");
+    }
+
+    //    Retrieve track by name failure
+    @Test(expected = TrackNotFound.class)
+    public void givenTrackNameShouldReturnTrackNotFoundException() throws Exception {
+        trackService.getTrackByName("chainsmoker");
     }
 }
