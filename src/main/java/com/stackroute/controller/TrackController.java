@@ -64,14 +64,7 @@ public class TrackController {
         return responseEntity;
     }
     //method for update track by id
-
-//    @PatchMapping("/track/{id}")
-//    public ResponseEntity updateTrackById(@PathVariable int id) throws Exception {
-//        Track sendUpdateTrack = trackService.updateTrackById(id);
-//        return new ResponseEntity(sendUpdateTrack, HttpStatus.ACCEPTED);
-//    }
-
-    @PatchMapping("track/{id}")
+     @PatchMapping("track/{id}")
     public ResponseEntity<?> updateTrack(@PathVariable int id, @RequestBody Track track) {
         ResponseEntity responseEntity;
         try {
