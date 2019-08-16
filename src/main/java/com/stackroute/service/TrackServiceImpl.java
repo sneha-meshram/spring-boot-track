@@ -35,10 +35,11 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public List<Track> getTrackByName(String name) throws TrackNotFound {
-        if (trackRepository.findByName(name).isEmpty()) {
-            throw new TrackNotFound("track not found");
-        } else
-            return trackRepository.findByName(name);
+//        if (trackRepository.findByName(name).isEmpty()) {
+//            throw new TrackNotFound("track not found");
+//        } else
+//            return trackRepository.findByName(name);
+        return null;
     }
 
     @Override
